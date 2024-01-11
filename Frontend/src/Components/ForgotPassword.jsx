@@ -14,7 +14,9 @@ const ForgotPassword = () => {
   //     setErrors(Validation(values));
   //   };
   return (
-    <div className="d-flex bg-black content-box text-black-70 justify-content-center align-items-center vh-100">
+    <div
+      className={`${styles.forgotContainer} d-flex bg-black content-box text-black-70 justify-content-center align-items-center vh-100`}
+    >
       <div className="p-4 rounded w-50 h-80 bg-white">
         <h2 className="text-center p-3">Forgot Password?</h2>
         <p className=" d-flex justify-content-center align-items-center ">

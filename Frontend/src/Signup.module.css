@@ -1,10 +1,7 @@
 .signupContainer {
-  background: rgb(108, 179, 45);
-  background: radial-gradient(
-    circle,
-    rgba(108, 179, 45, 1) 47%,
-    rgba(166, 231, 108, 1) 100%
-  );
+  background-image: url("mixedimages2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .container {
   background-color: rgba(255, 255, 255, 0.5);
