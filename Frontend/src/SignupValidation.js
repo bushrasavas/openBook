@@ -3,12 +3,11 @@ function Validation(values) {
   const email_pattern = /^([a-zA-Z0-9\._]+)@([a-zA-Z0-9])+.([a-z]+)(.[a-z]+)?$/;
   const password_pattern = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 
-  // if(values.name === ""){
-  //     error.name = "Please provide a valid email"
-  // }
-  // else{
-  //     error.name = ""
-  // }
+  if (values.name === "") {
+    error.name = "Please provide a name";
+  } else {
+    error.name = "";
+  }
   if (values.email === "") {
     error.email = "Please provide a valid email";
   } else if (!email_pattern.test(values.email)) {

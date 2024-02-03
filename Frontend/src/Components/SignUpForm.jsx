@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Validation from "../SignupValidation.js";
 import styles from "./SignUpForm.module.css";
 import { FaUser } from "react-icons/fa";
 import passEye from "./passEye.jsx";
+import axios from "axios";
 
 function SignUpForm() {
   const [PasswordInputType, ToggleIcon] = passEye();
@@ -12,17 +13,48 @@ function SignUpForm() {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    loadUsers();
+  }, []);
   const [errors, setErrors] = useState({});
   const handleInput = (e) => {
-    setValues((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
+    console.log("Input Name:", e.target.name);
+    console.log("Input Value:", e.target.value);
+    setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  const loadUsers = async () => {
+    try {
+      const result = await axios.get("http://localhost:8080/signupUsers");
+      console.log("API Result:", result.data);
+    } catch (error) {
+      console.error("Error loading users:", error);
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Form Data:", values);
+
     setErrors(Validation(values));
+
+    try {
+      const response = await axios.post("http://localhost:8080/signup", values);
+      console.log(response.data);
+    } catch (error) {
+      if (error.response) {
+        console.error("Server responded with an error:", error.response.data);
+        console.error("Status code:", error.response.status);
+        console.error("Headers:", error.response.headers);
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+      } else {
+        console.error("Error setting up the request:", error.message);
+      }
+    }
   };
   return (
-    <form action="" onSubmit={handleSubmit}>
+    <form action="" onSubmit={(e) => handleSubmit(e)}>
       <div className="mb-3">
         {/* <label htmlFor="Name">
           {" "}
@@ -46,7 +78,7 @@ function SignUpForm() {
         <div className={`${styles.inputIcon}`}>
           <input
             type="email"
-            placeholder="User Name"
+            placeholder="Enter email"
             name="email"
             onChange={handleInput}
             className="form-control rounded-3"

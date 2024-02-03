@@ -4,6 +4,7 @@ import Validation from "../LoginValidation.js";
 import styles from "./Form.module.css";
 import { FaUser } from "react-icons/fa";
 import passEye from "./passEye.jsx";
+import axios from "axios";
 
 function Form() {
   const [PasswordInputType, ToggleIcon] = passEye();
@@ -16,9 +17,21 @@ function Form() {
     setValues((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors(Validation(values));
+    try {
+      // Send login data to the backend
+      const response = await axios.post("http://localhost:8080/login", values);
+
+      // Handle the response accordingly (e.g., set authentication token, redirect)
+      console.log("Login successful:", response.data);
+
+      // Add your authentication logic here (e.g., set a token in local storage)
+    } catch (error) {
+      console.error("Login failed:", error.response.data);
+      // Handle login failure (e.g., display an error message)
+    }
   };
 
   return (
@@ -69,7 +82,9 @@ function Form() {
           <input type="checkbox" id="rememberMeCheckbox" />
           <label htmlFor="rememberMeCheckbox">Remember Me</label>
         </div>
-        <Link to="/forgetpassword">Forgot Password?</Link>
+        <Link to="/forgetpassword" className={`${styles.passButton}`}>
+          Forgot Password?
+        </Link>
       </div>
       <p className="mt-3 text-center">Not a member?</p>
       <Link
