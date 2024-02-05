@@ -3,7 +3,7 @@ import App from "./App";
 import Registration from "./components/Registration";
 import Home from "./components/Home"
 import Login from "./components/Login"
-import About from "./components/About"
+import About from "./components/About/About"
 import Contact from "./components/Contact"
 import MyBooks from "./components/MyBooks"
 import BorrowedBooks from "./components/BorrowedBooks"
