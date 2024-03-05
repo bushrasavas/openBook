@@ -29,7 +29,7 @@ export default function BookList() {
 
     const fetchBooks = () => {
         setLoading(true);
-        axios.get('/api/books').then(response => {
+        axios.get('/books').then(response => {
             setBooksData(response.data);
             setLoading(false);
         }).catch(error => {

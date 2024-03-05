@@ -93,7 +93,7 @@ export default function BookEditor({ book, mode, onClose }) {
 
         try {
             if (mode === 'edit') {
-                await axios.put(`/api/books/${book.id}`, formData, {
+                await axios.put(`/books/${book.id}`, formData, {
                     headers: { 'Content-Type': 'multipart/form-data' },
                 });
             }
@@ -106,7 +106,7 @@ export default function BookEditor({ book, mode, onClose }) {
     const handleDelete = async () => {
         try {
             if (mode === 'delete') {
-                await axios.delete(`/api/books/${book.id}`);
+                await axios.delete(`/books/${book.id}`);
             }
             onClose(); // Refresh the list and close the modal
         } catch (error) {

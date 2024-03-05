@@ -257,7 +257,198 @@
 //     );
 // }
 
-import { v4 as uuidv4 } from 'uuid';
+
+
+// import React, { useEffect, useState } from 'react';
+// import { useForm } from 'react-hook-form';
+// import * as yup from 'yup';
+// import { yupResolver } from '@hookform/resolvers/yup';
+// import axios from 'axios';
+// import defaultImage from './book.png'; 
+// import './MyBooks.css';
+
+// const isbnValidation = yup.string().matches(/^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$/, 'Invalid ISBN number!').required('ISBN Number is required!');
+
+// const ukPostCodeRegex = /^[A-Z]{1,2}[0-9R][0-9A-Z]? ?[0-9][A-Z]{2}$/i;
+
+// const schema = yup.object().shape({
+//     isbn: isbnValidation,
+//     title: yup.string().required('Book Title is required!'),
+//     author: yup.string().required('Author Name is required!'),
+//     publisher: yup.string(),
+//     publishedYear: yup.number().integer().typeError('Invalid year').min(1000).max(new Date().getFullYear()),
+//     condition: yup.string(),
+//     genre: yup.string(),
+//     description: yup.string(),
+//     postCode: yup.string().matches(ukPostCodeRegex, 'Invalid post code!').required('Post code is required!'),
+//     contactPreferences: yup.array().min(1, 'At least one contact preference is required!').of(yup.string()),
+//     coverImage: yup.mixed().required('A cover image is required!'),
+// });
+
+// export default function AddingBook() {
+//     const { register, handleSubmit, watch, formState: { errors } } = useForm({
+//         resolver: yupResolver(schema)
+//     });
+
+//     const [coverImagePreview, setCoverImagePreview] = useState(defaultImage);
+
+//     const contactPreferences = watch("contactPreferences", []);
+
+//     // useEffect(() => {
+//     //     const coverImageFile = watch('coverImage');
+//     //     if (coverImageFile && coverImageFile.length > 0) {
+//     //         const fileReader = new FileReader();
+//     //         fileReader.onload = () => {
+//     //             setCoverImagePreview(fileReader.result);
+//     //         };
+//     //         fileReader.readAsDataURL(coverImageFile[0]);
+//     //     } else {
+//     //         setCoverImagePreview(defaultImage);
+//     //     }
+//     // }, [watch('coverImage')]);
+
+//     const coverImageWatch = watch('coverImage'); // 'coverImage' alanını izle
+
+// useEffect(() => {
+//     // watch fonksiyonunun sonucunu kullanarak coverImageFile tanımlıyoruz
+//     const coverImageFile = coverImageWatch;
+//     if (coverImageFile && coverImageFile.length > 0) {
+//         const fileReader = new FileReader();
+//         fileReader.onload = () => {
+//             setCoverImagePreview(fileReader.result); // Dosya okunduğunda önizlemeyi ayarla
+//         };
+//         fileReader.readAsDataURL(coverImageFile[0]); // İlk dosyayı oku
+//     } else {
+//         setCoverImagePreview(defaultImage); // Dosya yoksa varsayılan resmi kullan
+//     }
+// }, [coverImageWatch]); // Bağımlılık olarak coverImageWatch kullan
+
+
+//     const onSubmit = async (data) => {
+//         const formData = new FormData();
+
+//         Object.entries(data).forEach(([key, value]) => {
+//             if (key === 'coverImage' && value.length) {
+//                 formData.append(key, value[0]);
+//             } else if (key === 'contactPreferences') {
+//                 formData.append(key, JSON.stringify(value));
+//             } else {
+//                 formData.append(key, value);
+//             }
+//         });
+
+//         try {
+//             const response = await axios.post('http://localhost:8080/api/books', formData, {
+//                 headers: {
+//                     'Content-Type': 'multipart/form-data'
+//                 }
+//             });
+//             console.log("Book added successfully", response.data);
+
+//         } catch (error) {
+//             console.error("Error adding book:", error);
+//         }
+//     };
+
+//     return (
+//         <form className="adding-book-form" onSubmit={handleSubmit(onSubmit)}>
+
+//             {/* Diğer form elemanları ve submit butonu */}
+//             {/* ISBN Number */}
+//             <label className="label">
+//                 ISBN Number*:
+//                 <input className="input" type="text" {...register('isbn')} />
+//                 {errors.isbn && <p className="error-message">{errors.isbn.message}</p>}
+//             </label>
+    
+//             {/* Book Title */}
+//             <label className="label">
+//                 Book Title*:
+//                 <input className="input" type="text" {...register('title')} />
+//                 {errors.title && <p className="error-message">{errors.title.message}</p>}
+//             </label>
+    
+//             {/* Author Name */}
+//             <label className="label">
+//                 Author Name*:
+//                 <input className="input" type="text" {...register('author')} />
+//                 {errors.author && <p className="error-message">{errors.author.message}</p>}
+//             </label>
+    
+//             {/* Publisher */}
+//             <label className="label">
+//                 Publisher:
+//                 <input className="input" type="text" {...register('publisher')} />
+//             </label>
+    
+//             {/* Published Year */}
+//             <label className="label">
+//                 Published Year:
+//                 <input className="input" type="number" {...register('publishedYear')} />
+//             </label>
+    
+//             {/* Condition */}
+//             <div className="label">Condition:</div>
+//             <div className="choiceInput">
+//                 <label><input type="radio" value="Like New" {...register('condition')} /> Like New</label>
+//                 <label><input type="radio" value="Very Good" {...register('condition')} /> Very Good</label>
+//                 <label><input type="radio" value="Good" {...register('condition')} /> Good</label>
+//                 <label><input type="radio" value="Acceptable" {...register('condition')} /> Acceptable</label>
+//             </div>
+    
+//             {/* Genre */}
+//             <label className="label">
+//                 Genre:
+//                 <select className="select" {...register('genre')}>
+//                     <option value="">Choose a genre</option>
+//                     <option value="Fiction">Fiction</option>
+//                     <option value="Novel">Novel</option>
+//                     <option value="History">History</option>
+//                     <option value="A-Level">A-Level</option>
+//                     <option value="GCSE">GCSE</option>
+//                     <option value="Other">Other</option>
+//                 </select>
+//             </label>
+    
+//             {/* Description */}
+//             <label className="label">
+//                 Description:
+//                 <textarea className="textarea" {...register('description')}></textarea>
+//             </label>
+    
+//             <label className="label">
+//                 Cover Image:
+//                 <input className="input" type="file" {...register('coverImage')} />
+//                 <img src={coverImagePreview} alt="Cover Preview" style={{ maxWidth: '100px', marginTop: '10px' }} />
+//                 {errors.coverImage && <p className="error-message">{errors.coverImage.message}</p>}
+//             </label>
+    
+//             {/* Post Code */}
+//             <label className="label">
+//                 Post Code*:
+//                 <input className="input" type="text" {...register('postCode')} />
+//                 {errors.postCode && <p className="error-message">{errors.postCode.message}</p>}
+//             </label>
+    
+//             {/* Contact Preference */}
+//             <div className="label">How do you prefer users to contact you?*</div>
+//             <div className="choiceInput">
+//                 <label><input type="checkbox" value="Phone" {...register('contactPreferences')} checked={contactPreferences.includes("Phone")} /> Phone</label>
+//                 <label><input type="checkbox" value="Email" {...register('contactPreferences')} checked={contactPreferences.includes("Email")} /> Email</label>
+//             </div>
+//             {errors.contactPreferences && <p className='error-message'>{errors.contactPreferences.message}</p>}
+    
+//             {/* Submit Button */}
+//             <button className="submitButton" type="submit">Submit</button>
+//         </form>
+//     );
+// }
+
+
+
+
+
+//import { v4 as uuidv4 } from 'uuid';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -354,8 +545,8 @@ export default function AddingBook() {
     //     }
     // }, [watch('coverImage')]);
 
-    const onSubmit = async (data) => {
-        const bookId = uuidv4(); // Generate a unique ID for the new book
+
+        const onSubmit = async (data) => {
         const formData = new FormData();
 
         // Append each form field to formData
@@ -367,27 +558,55 @@ export default function AddingBook() {
             }
         });
 
-        // Append the unique ID
-        formData.append('id', bookId);
-
         // Handle cover image separately to include either uploaded file or URL
         const coverImageFile = document.getElementById('coverImage').files[0];
         if (coverImageFile) {
             formData.append('coverImage', coverImageFile); // Uploaded file
-        } else {
-            formData.append('coverImageUrl', coverImagePreview); // Open Library or default image URL
         }
 
         try {
-            await axios.post('/api/books', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' },
-            });
+            await axios.post('http://localhost:8080/api/books/upload', formData); // URL'i kontrol edin
             // Handle success
             console.log("Book added successfully");
         } catch (error) {
             console.error("Error adding book:", error);
         }
     };
+
+    // const onSubmit = async (data) => {
+    //     const bookId = uuidv4(); // Generate a unique ID for the new book
+    //     const formData = new FormData();
+
+    //     // Append each form field to formData
+    //     Object.entries(data).forEach(([key, value]) => {
+    //         if (key === 'contactPreferences') {
+    //             formData.append(key, JSON.stringify(value)); // Handle array as JSON string
+    //         } else {
+    //             formData.append(key, value);
+    //         }
+    //     });
+
+    //     // Append the unique ID
+    //     formData.append('id', bookId);
+
+    //     // Handle cover image separately to include either uploaded file or URL
+    //     const coverImageFile = document.getElementById('coverImage').files[0];
+    //     if (coverImageFile) {
+    //         formData.append('coverImage', coverImageFile); // Uploaded file
+    //     } else {
+    //         formData.append('coverImageUrl', coverImagePreview); // Open Library or default image URL
+    //     }
+
+    //     try {
+    //         await axios.post('http://localhost:8080/api/books', formData, {
+    //             headers: { 'Content-Type': 'multipart/form-data' },
+    //         });
+    //         // Handle success
+    //         console.log("Book added successfully");
+    //     } catch (error) {
+    //         console.error("Error adding book:", error);
+    //     }
+    // };
 
     return (
         <form className="adding-book-form" onSubmit={handleSubmit(onSubmit)}>

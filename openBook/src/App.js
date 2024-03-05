@@ -41,6 +41,7 @@ export default function App() {
           {isLoggedIn ? (
             <>
               <Link to={'/'} onClick={handleNavLinkClick}>Home</Link>
+              <Link to={'/books'} onClick={handleNavLinkClick}>Books</Link>
               <Link to={'/mybooks'} onClick={handleNavLinkClick}>My Books</Link>
               <Link to={'/borrowedbooks'} onClick={handleNavLinkClick}>Borrowed Books</Link>
               <Link to={'/profile'} onClick={handleNavLinkClick}>Profile</Link>
@@ -49,6 +50,7 @@ export default function App() {
           ) : (
             <>
               <Link to={'/'} onClick={handleNavLinkClick}>Home</Link>
+              <Link to={'/books'} onClick={handleNavLinkClick}>Books</Link>
               <Link to={'/about'} onClick={handleNavLinkClick}>About</Link>
               <Link to={'/contact'} onClick={handleNavLinkClick}>Contact</Link>
               <Link to={'/register'} onClick={handleNavLinkClick}>Register</Link>
