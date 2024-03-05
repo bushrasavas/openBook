@@ -5,7 +5,7 @@ import Home from "./components/Home"
 import Login from "./components/Login"
 import About from "./components/About/About"
 import Contact from "./components/Contact"
-import MyBooks from "./components/MyBooks"
+import MyBooks from "./components/MyBooks/MyBooks"
 import BorrowedBooks from "./components/BorrowedBooks"
 import Profile from "./components/Profile";
 
