@@ -1,4 +1,3 @@
-/* General Styles for All Components */
 .container {
     max-width: 75rem;
     width: 100%;
@@ -32,7 +31,36 @@
     background-color: darkgray; /* Slightly darker shade on hover */
 }
 
-/* You can also add transitions for the icons if needed */
+.list{
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+}
+.listing{
+    margin: 20px 0px;
+    padding: 10px;
+    display: contents;
+
+}
+
+.header {
+    padding: 2px;
+    margin: 30px 6px;
+    text-align: left;
+    color: black;
+    font-size: 20px;
+}
+
+.filtering {
+    margin: 5px 10px;
+    justify-content: flex-end;
+    display: flex;
+}
+
+.filtering select{
+    margin-left: 10px;
+}
+
 .button-icon {
     transition: transform 0.3s ease;
     justify-content: center;
@@ -66,7 +94,6 @@
     font-size: 0.8em;
 }
 
-/* Styles Specific to AddingBook Component */
 .adding-book-form {
     background-color: #F9F7F6;
     padding: 20px;
@@ -115,22 +142,81 @@
     background-color: #7cc53c;
 }
 
-
-/* BookList*/
 .book-container {
+    margin: 10px 0px;
+    padding: 5px;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.book-container .inner-div{
+    display: flex;
+    margin: 10px;
     margin-bottom: 20px;
 }
+
+.book-container .inner-div2{
+    width: 40%;
+    display: flex;
+    margin: 10px;
+    flex-direction: column;
+}
+
+.book-detail-control{
+    margin: 8px 8px;
+    padding: 5px;
+    width: auto;
+    display: inline;    
+}
+
+.control-button{
+    margin: 2px;
+    padding: 2px;
+}
+
 
 .book-image {
     width: 100px;
     height: 150px;
 }
 
+.modal{
+    margin: 5px;
+    margin-bottom: 20px;
+    padding: 5px;
+}
 
+.edit-button-container{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
 
+.edit-button-container button{
+    width: 120px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    width: 150px;
+    padding: 5px;
+    margin: 20px;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
 
-/* Styles for other components (BookList, BookEditor, etc.) */
-/* ... */
-
-
-
+.delete-message{
+    width: 40%;
+    margin: auto;
+    padding: 20px;
+    padding-top: 38px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-style: groove;
+    border-radius: 8px;
+    background-color: #ffffff;
+}

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Books(){
+export default function Contact(){
     return (
         <div>
             <p>This is Books</p>
