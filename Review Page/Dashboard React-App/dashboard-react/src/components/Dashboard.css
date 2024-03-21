@@ -1,0 +1,68 @@
+.Dashboard {
+    border: 1px solid red; 
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    overflow: hidden;
+}
+.Dashboard h2 {
+    text-align: center;
+    font-size: 30px;
+}
+.Dashboard .filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 1px solid black;
+}
+
+.Books ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.Books li {
+    display: flex;
+    gap: 3em;
+    border: 5px solid grey; 
+    padding: 25px;
+    list-style-type: none;
+    width: 95%;
+
+    animation: fadeIn 0.5s ease-in-out; /* Adjust the duration and easing as needed */
+    margin-bottom: 10px; /* Add some space between book items */
+    
+}
+.Books {
+    min-height: 595px;
+    max-height: 595px; /* Set the maximum height for the container */
+    overflow-y: auto; /* Enable vertical scrollbar when needed */
+    border: 10px solid #ccc; /* Optional: Add a border for better visualization */
+}
+
+.container {
+    width: 125px; /* Set the width of your container */
+    border: 2px solid #ccc; /* Optional: Add a border for better visualization */
+    overflow: hidden; /* Optional: Hide any overflow */
+    display: flex;
+}
+  
+.contained-image {
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}

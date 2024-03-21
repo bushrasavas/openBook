@@ -1,0 +1,6 @@
+go into dashboard-react
+open cmd
+
+type
+
+npm run start
