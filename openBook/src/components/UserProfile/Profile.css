@@ -1,0 +1,33 @@
+.user-profile-container {
+    background-color: #f1f6eb;
+    padding: 20px;
+  }
+  
+  .user-profile-table {
+    width: 100%;
+  }
+  
+  .user-profile-table td {
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .user-profile-table input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin: 4px 0;
+    box-sizing: border-box;
+  }
+  
+  .user-profile-table button {
+    background-color: #4b9c13;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .user-profile-table button:hover {
+    background-color: #b3cc0f;
+  }
