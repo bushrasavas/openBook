@@ -1,9 +1,9 @@
-// BookList.js
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
-import BookEditor from './BookEditor'; // Ensure this path is correct
+import BookEditor from './BookEditor'; 
 import defaultImage from './book.png';
 import './MyBooks.css';
+import { MdEdit, MdDelete } from "react-icons/md";
 
 const sortingOptions = {
     'author-asc': (a, b) => a.author.localeCompare(b.author),
@@ -30,14 +30,20 @@ export default function BookList() {
     const fetchBooks = () => {
         setLoading(true);
         axios.get('/api/books').then(response => {
-            setBooksData(response.data);
-            setLoading(false);
-        }).catch(error => {
+            const updatedBooksData = response.data.map(book => ({
+                ...book,
+                coverImage: book.coverImage ? `data:image/jpeg;base64,${book.coverImage}` : defaultImage
+            }));
+            setBooksData(updatedBooksData);
+        })
+        .catch(error => {
             console.error("Error fetching books:", error);
             setError(error);
+        })
+        .finally(() => {
             setLoading(false);
         });
-    };
+    }; 
 
     const openEditor = (book) => {
         setCurrentBook(book);
@@ -52,7 +58,9 @@ export default function BookList() {
     const closeModal = () => {
         setCurrentBook(null);
         setMode('');
-        fetchBooks(); // Refresh the list after any operation
+        
+        // Refresh the list after any operation
+        fetchBooks(); 
     };
 
     const filteredAndSortedBooks = useMemo(() => {
@@ -64,30 +72,14 @@ export default function BookList() {
     }, [booksData, searchKeyword, sortOption]);
 
     return (
-        <div>
-            <h2>Library</h2>
+        <div className="listing">
+            <div className='header'>
+                <h2>Library</h2>
+            </div>
+
             {loading && <div>Loading books...</div>}
             {error && <div>Error fetching books. Please try again later.</div>}
-            <input type="text" placeholder="Search by title or author..." value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)} />
-            <select onChange={(e) => setSortOption(e.target.value)} value={sortOption}>
-                <option value="title-asc">Title (A-Z)</option>
-                <option value="title-desc">Title (Z-A)</option>
-                <option value="author-asc">Author (A-Z)</option>
-                <option value="author-desc">Author (Z-A)</option>
-                <option value="year-desc">Year (Newest)</option>
-                <option value="year-asc">Year (Oldest)</option>
-            </select>
-            {!loading && !error && filteredAndSortedBooks.map(book => (
-                <div key={book.id} className='book-container'>
-                    <img src={book.coverImage || defaultImage} alt="Cover" className='book-image' />
-                    <div>Title: {book.title}</div>
-                    <div>Author: {book.author}</div>
-                    <div>Year: {book.publishedYear}</div>
-                    <div>Condition: {book.condition}</div>
-                    <button onClick={() => openEditor(book)}>Edit</button>
-                    <button onClick={() => openDeleter(book)}>Delete</button>
-                </div>
-            ))}
+
             {currentBook && (
                 <BookEditor
                     book={currentBook}
@@ -95,6 +87,39 @@ export default function BookList() {
                     onClose={closeModal}
                 />
             )}
+            
+            <div className='filtering'>
+                <input type="text" placeholder="Search by title or author..." value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)} />
+                <select onChange={(e) => setSortOption(e.target.value)} value={sortOption}>
+                    <option value="title-asc">Title (A-Z)</option>
+                    <option value="title-desc">Title (Z-A)</option>
+                    <option value="author-asc">Author (A-Z)</option>
+                    <option value="author-desc">Author (Z-A)</option>
+                    <option value="year-desc">Year (Newest)</option>
+                    <option value="year-asc">Year (Oldest)</option>
+                </select>
+            </div>
+
+            
+            {!loading && !error && filteredAndSortedBooks.map(book => (
+                <div key={book.id} className='book-container'>
+                    <div className="inner-div">
+                        <img src={book.coverImage} alt="Cover" className='book-image' />
+                    </div>
+                    <div className='inner-div2'>
+                        {book.title && <div><strong>Title: </strong>{book.title}</div>}
+                        {book.author && <div><strong>Author: </strong>{book.author}</div>}
+                        {book.publishedYear && <div><strong>Year: </strong>{book.publishedYear}</div>}
+                        {book.bookCondition && <div><strong>Condition: </strong>{book.bookCondition}</div>}
+                        {book.location && <div><strong>Location: </strong>{book.location}</div>}
+                    </div>
+                    <div className="book-detail-control">
+                        <button className="control-button" onClick={() => openEditor(book)}><MdEdit/></button>
+                        <button className="control-button" onClick={() => openDeleter(book)}><MdDelete/></button>
+                    </div>
+                    
+                </div>
+                ))}
         </div>
     );
 }

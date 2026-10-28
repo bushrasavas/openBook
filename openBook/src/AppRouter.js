@@ -8,6 +8,8 @@ import Contact from "./components/Contact"
 import MyBooks from "./components/MyBooks/MyBooks"
 import BorrowedBooks from "./components/BorrowedBooks"
 import Profile from "./components/UserProfile/Profile";
+import Books from "./components/Books/Book";
+import Revision from "./components/Revision/Revision";
 
 export default function AppRouter(){
   return (
@@ -20,8 +22,9 @@ export default function AppRouter(){
           <Route path={'/register'} element={<Registration/>}/>
           <Route path={'/login'} element={<Login />}/>
           <Route path={'/mybooks'} element={<MyBooks />}/>
-          <Route path={'/borrowedbooks'} element={<BorrowedBooks />}/>
           <Route path={'/profile'} element={<Profile />}/>
+          <Route path={'/book'} element={<Books />}/>
+          <Route path={'/revision'} element={<Revision />}/>
         </Route>
       </Routes>
     </Router>
