@@ -6,8 +6,7 @@ Built as a **Level 2 group project at Brunel University London (2023–24)**, al
 
 > This repository is my personal copy of the group project. I led the **My Books** feature end to end (React + Spring Boot + MySQL) and set up the shared frontend structure the team built on.
 
-<!-- SCREENSHOT: My Books page with a few listed books -->
-<!-- ![My Books](screenshots/my-books.png) -->
+https://github.com/user-attachments/assets/3ddeb14f-4d53-4790-a4e5-4dce42fd3dba
 
 ---
 
@@ -21,9 +20,6 @@ My Books lets a user manage the books they are offering to lend.
 - **Cover images** stored in MySQL as BLOBs and served back as images
 - **Form validation** with React Hook Form and Yup: ISBN-10 / ISBN-13 format checking, required fields and a publication year that can't be in the future, with inline error messages under each field. The Open Library lookup only runs once the ISBN is valid, avoiding unnecessary API calls.
 - **Sorting and filtering** of the user's book list on the frontend
-
-<!-- SCREENSHOT/GIF: entering an ISBN and the form filling itself -->
-<!-- ![ISBN auto-fill](screenshots/isbn-autofill.gif) -->
 
 ---
 
